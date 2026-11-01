@@ -1,4 +1,4 @@
-import PhotoSwipe from './vendor/photoswipe.esm.min.js?v=0efaaca5e196';
+import PhotoSwipe from './vendor/photoswipe.esm.min.js?v=2efbe7b46684';
 
 const gallery = document.querySelector('#gallery');
 const status = document.querySelector('#status');
@@ -204,15 +204,30 @@ function openPhoto(index, origin) {
     returnFocus: false,
   });
   viewer.on('uiRegister', () => {
+    viewer.ui.registerElement({ name: 'photo-loading', appendTo: 'root', order: 6, isButton: false,
+      onInit: (element, pswp) => {
+        element.setAttribute('role', 'status');
+        element.setAttribute('aria-live', 'polite');
+        const update = () => {
+          const loading = pswp.currSlide?.content.isLoading() === true;
+          element.hidden = !loading;
+          element.innerHTML = loading ? '<span class="viewer-spinner" aria-hidden="true"></span><span>Carregando foto...</span>' : '';
+        };
+        pswp.on('change', update);
+        pswp.on('loadComplete', update);
+        pswp.on('contentLoad', () => queueMicrotask(update));
+        update();
+      }
+    });
     viewer.ui.registerElement({ name: 'actions', appendTo: 'root', order: 7, isButton: false,
       onInit: (element, pswp) => {
         element.setAttribute('role', 'group');
         element.setAttribute('aria-label', 'Ações da foto');
         const download = document.createElement('a');
         download.className = 'photo-action photo-action--download';
-        download.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span>Baixar foto</span>';
-        download.setAttribute('aria-label', 'Baixar foto');
-        pswp.on('change', () => { download.href = source(pswp.currIndex); download.download = photos[pswp.currIndex].webp || photos[pswp.currIndex].file; });
+        download.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span>Baixar Foto HD</span>';
+        download.setAttribute('aria-label', 'Baixar Foto HD');
+        pswp.on('change', () => { download.href = originalSource(pswp.currIndex); download.download = photos[pswp.currIndex].file; });
         const share = document.createElement('button');
         share.type = 'button'; share.className = 'photo-action photo-action--share';
         share.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4m-6.8 7 6.8 4"/></svg><span>Compartilhar</span>';
