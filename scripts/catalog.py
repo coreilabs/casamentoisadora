@@ -49,6 +49,8 @@ def webp_dimensions(path):
 photos = []
 state_path = ROOT / 'scripts/webp-progress.json'
 state = json.loads(state_path.read_text(encoding='utf-8')) if state_path.exists() else {}
+thumb_state_path = ROOT / 'scripts/thumbnails-progress.json'
+thumb_state = json.loads(thumb_state_path.read_text(encoding='utf-8')) if thumb_state_path.exists() else {}
 originals = {path.name: path for path in (ROOT / 'assets/gallery').glob('*.jpg')}
 webps = {path.stem + '.jpg': path for path in (ROOT / 'assets/gallery-webp').glob('*.webp') if not path.name.endswith('.tmp.webp')}
 for name in sorted(originals.keys() | webps.keys()):
@@ -61,6 +63,12 @@ for name in sorted(originals.keys() | webps.keys()):
             and entry.get('source_bytes') == path.stat().st_size and entry.get('webp_bytes') == webp.stat().st_size)):
         width, height = webp_dimensions(webp)
         photo.update(webp=webp.name, width=width, height=height)
+        thumb = ROOT / 'assets/gallery-thumbs' / webp.name
+        thumb_entry = thumb_state.get(webp.name, {})
+        if (thumb.is_file() and thumb_entry.get('mtime_ns') == webp.stat().st_mtime_ns
+                and thumb_entry.get('source_bytes') == webp.stat().st_size
+                and thumb_entry.get('bytes') == thumb.stat().st_size):
+            photo['thumbnail'] = thumb.name
     photos.append(photo)
 (ROOT / 'assets/photos.json').write_text(json.dumps(photos, separators=(',', ':')), encoding='utf-8')
 print(f'Catalog: {len(photos)} photos')

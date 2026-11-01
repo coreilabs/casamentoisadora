@@ -1,4 +1,4 @@
-import PhotoSwipe from './vendor/photoswipe.esm.min.js?v=eabd4664d954';
+import PhotoSwipe from './vendor/photoswipe.esm.min.js?v=0efaaca5e196';
 
 const gallery = document.querySelector('#gallery');
 const status = document.querySelector('#status');
@@ -69,6 +69,7 @@ function prioritizeImages() {
 const number = value => value.toLocaleString('pt-BR');
 const originalSource = index => `assets/gallery/${encodeURIComponent(photos[index].file)}`;
 const source = index => photos[index].webp ? `assets/gallery-webp/${encodeURIComponent(photos[index].webp)}` : originalSource(index);
+const thumbnailSource = index => photos[index].thumbnail ? `assets/gallery-thumbs/${encodeURIComponent(photos[index].thumbnail)}` : source(index);
 const photoIndex = () => {
   const match = location.hash.match(/^#foto=(\d+)$/);
   return match ? Number(match[1]) - 1 : -1;
@@ -121,7 +122,7 @@ function fillBlock(block) {
     link.setAttribute('aria-label', `Ampliar foto ${i + 1}`);
     link.setAttribute('aria-busy', 'true');
     const img = document.createElement('img');
-    img.dataset.src = source(i); img.alt = `Recordação do casamento de Isadora e Daniel Melo — foto ${i + 1}`;
+    img.dataset.src = thumbnailSource(i); img.alt = `Recordação do casamento de Isadora e Daniel Melo — foto ${i + 1}`;
     img.width = photos[i].width; img.height = photos[i].height;
     img.loading = 'lazy'; img.decoding = 'async';
     img.addEventListener('load', async () => {

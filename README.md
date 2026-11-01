@@ -36,7 +36,15 @@ Padrão: WebP qualidade 82, maior lado limitado a 1920 px, sem ampliar fotos men
 
 WebP já prontos também podem ser colocados diretamente em `assets/gallery-webp`. Depois execute `python scripts/catalog.py`. O catálogo funciona sem JPGs ou arquivo de progresso. O helper de conversão chama o catálogo e renova versões automaticamente.
 
-A grade usa quadros horizontais 3:2 e `object-fit: contain`: fotos horizontais e verticais aparecem inteiras, com margens quando necessário. Não são gerados arquivos separados de miniaturas. Use `--max-size 1920` para definir o limite do conversor (padrão: 1920). Alterar o limite invalida a retomada das conversões anteriores.
+A grade usa quadros horizontais 3:2 e `object-fit: contain`: fotos horizontais e verticais aparecem inteiras, com margens quando necessário. Use `--max-size 1920` para definir o limite do conversor (padrão: 1920). Alterar o limite invalida a retomada das conversões anteriores.
+
+Após converter fotos novas, gere as miniaturas com ImageMagick:
+
+```powershell
+python scripts/thumbnails.py
+```
+
+As miniaturas WebP ficam em `assets/gallery-thumbs`, com largura máxima de 320 px e qualidade 76. A altura mantém a proporção, sem cortes nem ampliação de fotos menores. A grade usa miniaturas; ampliar e baixar usa os WebP de até 1920 px. O script valida cada saída, retoma arquivos atuais, atualiza o catálogo e renova as versões. Publique também a pasta de miniaturas. O progresso fica em `scripts/thumbnails-progress.json`; não execute conversões simultâneas. Sem miniatura atual, o catálogo mantém a foto maior como alternativa.
 
 ## Visualizar e publicar
 
