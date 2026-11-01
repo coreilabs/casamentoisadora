@@ -1,6 +1,6 @@
 # Álbum de Fotos do Casamento de Isadora e Daniel Melo
 
-Galeria estática do casamento de Isadora e Daniel Melo, preparada para https://coreilabs.github.io/casamentoisadora/. Sem Analytics configurado e sem dependências locais de navegador.
+Galeria estática do casamento de Isadora e Daniel Melo, preparada para https://coreilabs.github.io/casamentoisadora/. Google Analytics configurado com o ID `G-Q1X5MDKPFR`, sem dependências locais de navegador.
 
 ## Personalização
 
