@@ -1,0 +1,4 @@
+Extraia em uma pasta nova. Abra README.md.
+
+Mensagem sugerida para o agente:
+Leia AGENTS.md e README.md. Configure esta galeria para [CLIENTE], na URL [URL], usando as fotos que vou fornecer. Preserve os recursos existentes, valide no Chrome e renove os hashes com --force. Nao publique sem meu pedido.
