@@ -33,9 +33,9 @@
   <meta name="twitter:description" content="Os sorrisos, os abraços e a alegria do casamento de Isadora e Daniel Melo. Um álbum para reviver, guardar e compartilhar esse dia especial.">
   <meta name="theme-color" content="#faf5ef">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/vendor/photoswipe.css?v=87418ba7e26d">
-  <link rel="stylesheet" href="assets/style.css?v=ddce8af76e0f">
-  <script type="module" src="assets/app.js?v=5b490f44ef2d"></script>
+  <link rel="stylesheet" href="assets/vendor/photoswipe.css?v=a59a3bbd72df">
+  <link rel="stylesheet" href="assets/style.css?v=a854b887a873">
+  <script type="module" src="assets/app.js?v=4f1cee8bbfdd"></script>
 </head>
 <body>
   <a class="skip" href="#album">Ir para as fotos</a>
@@ -59,7 +59,13 @@
     </section>
   </main>
   <footer><p class="eyebrow">COM AMOR,</p><span class="footer-title">Isadora &amp; Daniel Melo</span><p>Que a gente nunca se esqueça de como foi bonito.</p><a href="#title">Voltar ao início <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V4m-6 6 6-6 6 6"/></svg></a></footer>
-  <div class="creator-bar">Criado por <strong>Marco Aurélio</strong> com <svg viewBox="0 0 24 24" aria-label="amor" role="img"><path d="M12 21 3 12C-3 5 7-2 12 5c5-7 15 0 9 7Z"/></svg></div>
+  <button id="back-to-top" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V4m-6 6 6-6 6 6"/></svg><span data-i18n="fixedTop">Ir Para o Topo</span></button>
+  <div class="creator-bar"><span class="creator-credit"><span data-i18n="created">Criado por</span> <strong>Marco Aurélio</strong> <span data-i18n="with">com</span> <svg viewBox="0 0 24 24" aria-label="amor" role="img" data-i18n-aria="love"><path d="M12 21 3 12C-3 5 7-2 12 5c5-7 15 0 9 7Z"/></svg></span>
+    <div class="language-control" hidden>
+      <button id="language-toggle" type="button" aria-expanded="false" aria-controls="language-menu" aria-label="Escolher idioma / Choose language"><span class="country-flag fi fi-br" aria-hidden="true"></span><span id="language-code">PT-BR</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+      <div id="language-menu" hidden role="group" aria-label="Idioma / Language"><button type="button" data-language="pt-BR" lang="pt-BR" aria-pressed="true"><span class="country-flag fi fi-br" aria-hidden="true"></span>Português <span>PT-BR</span></button><button type="button" data-language="en-AU" lang="en-AU" aria-pressed="false"><span class="country-flag fi fi-au" aria-hidden="true"></span>English (Australia)</button></div>
+    </div>
+  </div>
   <noscript><p>Ative o JavaScript para explorar o álbum de fotografias.</p></noscript>
 </body>
 </html>

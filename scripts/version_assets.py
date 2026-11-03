@@ -23,6 +23,13 @@ source = re.sub(
 )
 app.write_text(source, encoding='utf-8')
 
+style = ROOT / 'assets/style.css'
+source = style.read_text(encoding='utf-8')
+for flag in ('br', 'au'):
+    asset = 'vendor/flag-icons/' + flag + '.svg'
+    source = re.sub(re.escape(asset) + r'(?:\?v=[a-zA-Z0-9-]+)?', asset + '?v=' + version('assets/' + asset), source)
+style.write_text(source, encoding='utf-8')
+
 html = ROOT / 'index.html'
 source = html.read_text(encoding='utf-8')
 for asset in ('assets/style.css', 'assets/vendor/photoswipe.css', 'assets/app.js'):
